@@ -35,7 +35,25 @@ public class Deck {
 		ShuffleCards();
 
 	}
-	
+	// one arg constructor in deck
+	 public Deck(int numofjoker) {
+	  ArrayList<Card> MakingDeck = new ArrayList<Card>();
+	  for (short i = 0; i <= 3; i++) {
+	   eSuit SuitValue = eSuit.values()[i];
+	   for (short j = 0; j <= 12; j++) {
+	    eRank RankValue = eRank.values()[j];
+	    Card NewCard = new Card(SuitValue, RankValue, (13 * i) + j + 1);
+	    MakingDeck.add(NewCard);
+	   }
+
+	  }
+	  if (numofjoker > 0) {
+	   for (short i = 1; i <= numofjoker; i++) {
+	    cards.add(new Card(eSuit.JOKER, eRank.JOKER, 53));
+	   }
+	  }
+	  ShuffleCards();
+	 }
 
 	
 	private void ShuffleCards()

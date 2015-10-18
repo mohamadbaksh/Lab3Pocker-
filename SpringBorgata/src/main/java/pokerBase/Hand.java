@@ -204,6 +204,13 @@ public class Hand {
 				&& Ace) {
 			ScoreHand(eHandStrength.RoyalFlush, 0, 0, null);
 		}
+		//  Royal flush (with a JOKER)
+		else if  (Joker == true && Straight == true
+				&& Flush == true
+				&& CardsInHand.get(eCardNo.FifthCard.getCardNo()).getRank() == eRank.TEN
+				&& Ace) {
+			ScoreHand(eHandStrength.NaturalRoyalFlush, 0,0, remainingCards);
+		}
 		// Natural royal flush
 		else if  (Straight == true
 				&& Flush == true
@@ -530,4 +537,28 @@ public class Hand {
 				return 0;
 		}
 	};
+	public static Hand pickBestHand(ArrayList<Hand> Hands) throws ExHand
+	{
+		int highestScore = 0;
+		int winner = 0;
+		
+		ArrayList<Integer> Scores = new ArrayList<Integer>();
+		
+		for(int i=0; i < Hands.size(); i++)
+		{
+			Hands.get(i).EvalHand();
+			int handScore = Hands.get(i).getHandStrength();
+			Scores.add(handScore);
+			if (handScore > highestScore)
+			{
+				handScore = highestScore;
+				i = winner;
+			}
+			if (Scores.get(Hands.size() - 2) == Scores.get(winner)){
+				throw new ExHand(Hands.get(winner));
+			}
+		}
+		System.out.println(Hands.get(winner) + " is the winner of this round.");
+		return Hands.get(winner);
+	}
 }
