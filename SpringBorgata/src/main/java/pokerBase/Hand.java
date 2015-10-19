@@ -218,20 +218,7 @@ public class Hand {
 				&& Ace) {
 			ScoreHand(eHandStrength.NaturalRoyalFlush, 0,0, remainingCards);
 		}
-		// Five of a Kind
-		else if (Joker == true && (CardsInHand.get(eCardNo.FifthCard.getCardNo()).getRank()== 
-				CardsInHand.get(eCardNo.FourthCard.getCardNo()).getRank() || 
-				CardsInHand.get(eCardNo.FourthCard.getCardNo()).getRank()== eRank.JOKER) && 
-				(CardsInHand.get(eCardNo.FifthCard.getCardNo()).getRank()== 
-				CardsInHand.get(eCardNo.ThirdCard.getCardNo()).getRank() || 
-				CardsInHand.get(eCardNo.ThirdCard.getCardNo()).getRank()== eRank.JOKER) &&
-				(CardsInHand.get(eCardNo.FifthCard.getCardNo()).getRank()== 
-				CardsInHand.get(eCardNo.SecondCard.getCardNo()).getRank() || 
-				CardsInHand.get(eCardNo.SecondCard.getCardNo()).getRank()== eRank.JOKER)){
-			ScoreHand(eHandStrength.FiveOfAKind,
-					CardsInHand.get(eCardNo.FifthCard.getCardNo()).getRank()
-					.getRank(),0,remainingCards);
-		}
+		
 		// Straight Flush
 		else if (Straight == true && Flush == true) {
 			remainingCards = null;
@@ -242,23 +229,30 @@ public class Hand {
 		
 		// five of a Kind
 
-		else if (CardsInHand.get(eCardNo.FirstCard.getCardNo()).getRank() == CardsInHand
-				.get(eCardNo.FifthCard.getCardNo()).getRank()) {
+		else if ((CardsInHand.get(eCardNo.FirstCard.getCardNo()).getRank() == CardsInHand
+				.get(eCardNo.SecondCard.getCardNo()).getRank() || CardsInHand.get(eCardNo.FirstCard.getCardNo()).getRank() == eRank.JOKER)
+				&& (CardsInHand.get(eCardNo.FirstCard.getCardNo()).getRank() == CardsInHand
+						.get(eCardNo.ThirdCard.getCardNo()).getRank()|| CardsInHand.get(eCardNo.FirstCard.getCardNo()).getRank() == eRank.JOKER)
+				&& (CardsInHand.get(eCardNo.FirstCard.getCardNo()).getRank() == CardsInHand
+						.get(eCardNo.FourthCard.getCardNo()).getRank()|| CardsInHand.get(eCardNo.FirstCard.getCardNo()).getRank() == eRank.JOKER)
+						&& (CardsInHand.get(eCardNo.FirstCard.getCardNo()).getRank()
+						== CardsInHand.get(eCardNo.FifthCard.getCardNo()).getRank()|| CardsInHand.get(eCardNo.FirstCard.getCardNo()).getRank() == eRank.JOKER))  {
 			remainingCards = null;
 			ScoreHand(eHandStrength.FiveOfAKind,
 					CardsInHand.get(eCardNo.FirstCard.getCardNo()).getRank()
 							.getRank(), 0, remainingCards);
+
 		}
 		
 		
 		// Four of a Kind
 
-		else if (CardsInHand.get(eCardNo.FirstCard.getCardNo()).getRank() == CardsInHand
-				.get(eCardNo.SecondCard.getCardNo()).getRank()
-				&& CardsInHand.get(eCardNo.FirstCard.getCardNo()).getRank() == CardsInHand
-						.get(eCardNo.ThirdCard.getCardNo()).getRank()
-				&& CardsInHand.get(eCardNo.FirstCard.getCardNo()).getRank() == CardsInHand
-						.get(eCardNo.FourthCard.getCardNo()).getRank()) {
+		else if ((CardsInHand.get(eCardNo.FirstCard.getCardNo()).getRank() == CardsInHand
+				.get(eCardNo.SecondCard.getCardNo()).getRank()|| CardsInHand.get(eCardNo.FirstCard.getCardNo()).getRank() == eRank.JOKER)
+				&& (CardsInHand.get(eCardNo.FirstCard.getCardNo()).getRank() == CardsInHand
+						.get(eCardNo.ThirdCard.getCardNo()).getRank()|| CardsInHand.get(eCardNo.FirstCard.getCardNo()).getRank() == eRank.JOKER)
+				&& (CardsInHand.get(eCardNo.FirstCard.getCardNo()).getRank() == CardsInHand
+						.get(eCardNo.FourthCard.getCardNo()).getRank()|| CardsInHand.get(eCardNo.FirstCard.getCardNo()).getRank() == eRank.JOKER)) {
 						
 			remainingCards.add(CardsInHand.get(eCardNo.FifthCard.getCardNo()));
 			ScoreHand(eHandStrength.FourOfAKind,
@@ -267,12 +261,12 @@ public class Hand {
 							remainingCards);
 		}
 
-		else if (CardsInHand.get(eCardNo.FifthCard.getCardNo()).getRank() == CardsInHand
-				.get(eCardNo.SecondCard.getCardNo()).getRank()
-				&& CardsInHand.get(eCardNo.FifthCard.getCardNo()).getRank() == CardsInHand
-						.get(eCardNo.ThirdCard.getCardNo()).getRank()
-				&& CardsInHand.get(eCardNo.FifthCard.getCardNo()).getRank() == CardsInHand
-						.get(eCardNo.FourthCard.getCardNo()).getRank()) {
+		else if ((CardsInHand.get(eCardNo.FifthCard.getCardNo()).getRank() == CardsInHand
+				.get(eCardNo.SecondCard.getCardNo()).getRank()|| CardsInHand.get(eCardNo.FifthCard.getCardNo()).getRank() == eRank.JOKER)
+				&& (CardsInHand.get(eCardNo.FifthCard.getCardNo()).getRank() == CardsInHand
+						.get(eCardNo.ThirdCard.getCardNo()).getRank()|| CardsInHand.get(eCardNo.FifthCard.getCardNo()).getRank() == eRank.JOKER)
+				&& (CardsInHand.get(eCardNo.FifthCard.getCardNo()).getRank() == CardsInHand
+						.get(eCardNo.FourthCard.getCardNo()).getRank()|| CardsInHand.get(eCardNo.FifthCard.getCardNo()).getRank() == eRank.JOKER)) {
 			
 			remainingCards.add(CardsInHand.get(eCardNo.FirstCard.getCardNo()));
 			ScoreHand(eHandStrength.FourOfAKind,
@@ -282,10 +276,10 @@ public class Hand {
 		}
 
 		// Full House
-		else if (CardsInHand.get(eCardNo.FirstCard.getCardNo()).getRank() == CardsInHand
-				.get(eCardNo.ThirdCard.getCardNo()).getRank()
-				&& CardsInHand.get(eCardNo.FourthCard.getCardNo()).getRank() == CardsInHand
-						.get(eCardNo.FifthCard.getCardNo()).getRank()) {
+		else if ((CardsInHand.get(eCardNo.FirstCard.getCardNo()).getRank() == CardsInHand
+				.get(eCardNo.ThirdCard.getCardNo()).getRank()|| CardsInHand.get(eCardNo.FirstCard.getCardNo()).getRank() == eRank.JOKER)
+				&& (CardsInHand.get(eCardNo.FourthCard.getCardNo()).getRank() == CardsInHand
+						.get(eCardNo.FifthCard.getCardNo()).getRank()|| CardsInHand.get(eCardNo.FourthCard.getCardNo()).getRank() == eRank.JOKER)) {
 			remainingCards = null;
 			ScoreHand(eHandStrength.FullHouse,
 					CardsInHand.get(eCardNo.FirstCard.getCardNo()).getRank()
@@ -294,10 +288,10 @@ public class Hand {
 							.getRank(), remainingCards);
 		}
 
-		else if (CardsInHand.get(eCardNo.ThirdCard.getCardNo()).getRank() == CardsInHand
-				.get(eCardNo.FifthCard.getCardNo()).getRank()
-				&& CardsInHand.get(eCardNo.FirstCard.getCardNo()).getRank() == CardsInHand
-						.get(eCardNo.SecondCard.getCardNo()).getRank()) {
+		else if ((CardsInHand.get(eCardNo.ThirdCard.getCardNo()).getRank() == CardsInHand
+				.get(eCardNo.FifthCard.getCardNo()).getRank()|| CardsInHand.get(eCardNo.ThirdCard.getCardNo()).getRank() == eRank.JOKER)
+				&& (CardsInHand.get(eCardNo.FirstCard.getCardNo()).getRank() == CardsInHand
+						.get(eCardNo.SecondCard.getCardNo()).getRank()|| CardsInHand.get(eCardNo.FirstCard.getCardNo()).getRank() == eRank.JOKER)) {
 			remainingCards = null;
 			ScoreHand(eHandStrength.FullHouse,
 					CardsInHand.get(eCardNo.ThirdCard.getCardNo()).getRank()
