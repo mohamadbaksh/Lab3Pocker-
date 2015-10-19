@@ -1,5 +1,5 @@
 package pokerBase;
-
+// 		System.out.println(h.getHandStrength());
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
@@ -119,7 +119,6 @@ public class Hand_Test {
 		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.NINE,0));
 		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.TEN,0));
 		h.EvalHand();
-		System.out.println(h.getHandStrength());
 		assertTrue(h.getHandStrength() == eHandStrength.StraightFlush.getHandStrength());
 		assertTrue(h.getHighPairStrength() == eRank.TEN.getRank());
 		assertTrue(h.getLowPairStrength() == 0);
@@ -127,7 +126,78 @@ public class Hand_Test {
 		
 		
 	}
-	
+
+	@Test
+
+	public void Straight_1() { 
+		Deck d = new Deck(); 
+		Hand h = new Hand(); 
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.TEN,0)); 
+		h.AddCardToHand(new Card(eSuit.DIAMONDS,eRank.JACK,0)); 
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.QUEEN,0)); 
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.KING,0)); 
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.NINE,0)); 
+		h.EvalHand(); 
+		assertTrue(h.getHandStrength() == eHandStrength.Straight.getHandStrength());
+		assertTrue(h.getHighPairStrength() == eRank.KING.getRank()); 
+		assertTrue(h.getLowPairStrength() == 0); 
+		assertTrue(h.getKicker() == null); 
+	}
+
+	@Test 
+
+	public void Straight_2() { 
+
+		Deck d = new Deck(); 
+		Hand h = new Hand(); 
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.TEN,0)); 
+		h.AddCardToHand(new Card(eSuit.DIAMONDS,eRank.JACK,0)); 
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.QUEEN,0)); 
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.JOKER,0)); 
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.NINE,0)); 
+		h.EvalHand(); 
+		assertTrue(h.getHandStrength() == eHandStrength.Straight.getHandStrength());
+		assertTrue(h.getHighPairStrength() == eRank.KING.getRank()); 
+		assertTrue(h.getLowPairStrength() == 0); 
+		assertTrue(h.getKicker() == null); 
+
+	}
+
+	@Test 
+
+	public void Straight_3() { 
+
+		Deck d = new Deck();
+		Hand h = new Hand(); 
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.JOKER,0)); 
+		h.AddCardToHand(new Card(eSuit.DIAMONDS,eRank.JACK,0)); 
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.QUEEN,0)); 
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.KING,0)); 
+		h.AddCardToHand(new Card(eSuit.DIAMONDS,eRank.JOKER,0)); 
+		h.EvalHand(); 
+		assertTrue(h.getHandStrength() == eHandStrength.Straight.getHandStrength());
+		assertTrue(h.getHighPairStrength() == eRank.KING.getRank()); 
+		assertTrue(h.getLowPairStrength() == 0); 
+		assertTrue(h.getKicker() == null); 
+
+	}
+
+	@Test
+	public void Straight_4() {
+		Deck d = new Deck(); 
+		Hand h = new Hand();
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.JOKER,0));
+		h.AddCardToHand(new Card(eSuit.DIAMONDS,eRank.JOKER,0)); 
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.QUEEN,0)); 
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.KING,0));
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.NINE,0));
+		h.EvalHand();
+		assertTrue(h.getHandStrength() == eHandStrength.Straight.getHandStrength());
+		assertTrue(h.getHighPairStrength() == eRank.KING.getRank());
+		assertTrue(h.getLowPairStrength() == 0);
+		assertTrue(h.getKicker() == null);
+	}
+		
 	@Test
 	public void Flush() {
 		Deck d = new Deck();
@@ -170,7 +240,7 @@ public class Hand_Test {
 		h.AddCardToHand(new Card(eSuit.HEARTS,eRank.TEN,0));
 		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.NINE,0));
 		h.EvalHand();
-		
+		System.out.println(h.getHandStrength());
 		assertTrue(h.getHandStrength() == eHandStrength.FourOfAKind.getHandStrength());
 		assertTrue(h.getHighPairStrength() == eRank.TEN.getRank());
 		assertTrue(h.getLowPairStrength() == 0);
@@ -265,7 +335,73 @@ public class Hand_Test {
 		
 		//	Check to see if the second kicker is a TWO
 		assertTrue(c2.getRank().getRank() == eRank.TWO.getRank());		
+	}
+	@Test
+	public void ThreeOfAKind4() {
+		Deck d = new Deck();
+		Hand h = new Hand();
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.TEN,0));
+		h.AddCardToHand(new Card(eSuit.DIAMONDS,eRank.TEN,0));
+		h.AddCardToHand(new Card(eSuit.SPADES,eRank.TEN,0));
+		h.AddCardToHand(new Card(eSuit.HEARTS,eRank.FOUR,0));
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.NINE,0));
+		h.EvalHand();
+		assertTrue(h.getHandStrength() == eHandStrength.ThreeOfAKind.getHandStrength());
+		assertTrue(h.getHighPairStrength() == eRank.TEN.getRank());
+		assertTrue(h.getLowPairStrength() == 0);
+		assertTrue(h.getKicker().size() == 2);
 	}		
+	@Test
+	public void ThreeOfAKind5() {
+		Deck d = new Deck();
+		Hand h = new Hand();
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.TEN,0));
+		h.AddCardToHand(new Card(eSuit.DIAMONDS,eRank.JOKER,0));
+		h.AddCardToHand(new Card(eSuit.SPADES,eRank.TEN,0));
+		h.AddCardToHand(new Card(eSuit.HEARTS,eRank.TWO,0));
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.THREE,0));
+		h.EvalHand();
+		System.out.println(h.getHandStrength());
+		assertTrue(h.getHandStrength() == eHandStrength.ThreeOfAKind.getHandStrength());
+		assertTrue(h.getHighPairStrength() == eRank.TEN.getRank());
+		assertTrue(h.getLowPairStrength() == 0);
+		assertTrue(h.getKicker().size() == 2);
+		
+		Card c1 = h.getKicker().get(eCardNo.FirstCard.getCardNo());
+		Card c2 = h.getKicker().get(eCardNo.SecondCard.getCardNo());
+		
+		//	Check to see if the first kicker is a KING
+		assertTrue(c1.getRank().getRank() == eRank.KING.getRank());
+		
+		//	Check to see if the second kicker is a NINE
+		assertTrue(c2.getRank().getRank() == eRank.NINE.getRank());
+	}		
+	@Test
+	public void ThreeOfAKind6() {
+		Deck d = new Deck();
+		Hand h = new Hand();
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.JOKER,0));
+		h.AddCardToHand(new Card(eSuit.DIAMONDS,eRank.JOKER,0));
+		h.AddCardToHand(new Card(eSuit.SPADES,eRank.TEN,0));
+		h.AddCardToHand(new Card(eSuit.HEARTS,eRank.TWO,0));
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.THREE,0));
+		h.EvalHand();
+		System.out.println(h.getHandStrength());
+		assertTrue(h.getHandStrength() == eHandStrength.ThreeOfAKind.getHandStrength());
+		assertTrue(h.getHighPairStrength() == eRank.TEN.getRank());
+		assertTrue(h.getLowPairStrength() == 0);
+		assertTrue(h.getKicker().size() == 2);
+		
+		Card c1 = h.getKicker().get(eCardNo.FirstCard.getCardNo());
+		Card c2 = h.getKicker().get(eCardNo.SecondCard.getCardNo());
+		
+		//	Check to see if the first kicker is a THREE
+		assertTrue(c1.getRank().getRank() == eRank.THREE.getRank());
+		
+		//	Check to see if the second kicker is a TWO
+		assertTrue(c2.getRank().getRank() == eRank.TWO.getRank());		
+	}
+
 	@Test
 	public void FullHouse_1() {
 		Deck d = new Deck();
@@ -319,7 +455,59 @@ public class Hand_Test {
 		
 		//	Check to see if the first kicker is a THREE
 		assertTrue(c1.getRank().getRank() == eRank.ACE.getRank());
-	}		
+	}	
+	@Test
+	public void TwoPair_1() {
+		Deck d = new Deck();
+		Hand h = new Hand();
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.JOKER,0));
+		h.AddCardToHand(new Card(eSuit.DIAMONDS,eRank.TEN,0));
+		h.AddCardToHand(new Card(eSuit.SPADES,eRank.TWO,0));
+		h.AddCardToHand(new Card(eSuit.HEARTS,eRank.TWO,0));
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.ACE,0));
+		h.EvalHand();
+		
+		assertTrue(h.getHandStrength() == eHandStrength.TwoPair.getHandStrength());
+		assertTrue(h.getHighPairStrength() == eRank.TEN.getRank());
+		assertTrue(h.getLowPairStrength() == eRank.TWO.getRank());
+		assertTrue(h.getKicker().size() == 1);
+		
+		}
+	@Test
+	public void TwoPair_2() {
+		Deck d = new Deck();
+		Hand h = new Hand();
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.JOKER,0));
+		h.AddCardToHand(new Card(eSuit.DIAMONDS,eRank.JOKER,0));
+		h.AddCardToHand(new Card(eSuit.SPADES,eRank.TWO,0));
+		h.AddCardToHand(new Card(eSuit.HEARTS,eRank.TWO,0));
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.ACE,0));
+		h.EvalHand();
+		
+		assertTrue(h.getHandStrength() == eHandStrength.TwoPair.getHandStrength());
+		assertTrue(h.getHighPairStrength() == eRank.TEN.getRank());
+		assertTrue(h.getLowPairStrength() == eRank.TWO.getRank());
+		assertTrue(h.getKicker().size() == 1);
+		
+	}
+	@Test
+	public void TwoPair_3() {
+		Deck d = new Deck();
+		Hand h = new Hand();
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.JOKER,0));
+		h.AddCardToHand(new Card(eSuit.DIAMONDS,eRank.TEN,0));
+		h.AddCardToHand(new Card(eSuit.SPADES,eRank.JOKER,0));
+		h.AddCardToHand(new Card(eSuit.HEARTS,eRank.TWO,0));
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.ACE,0));
+		h.EvalHand();
+		
+		assertTrue(h.getHandStrength() == eHandStrength.TwoPair.getHandStrength());
+		assertTrue(h.getHighPairStrength() == eRank.TEN.getRank());
+		assertTrue(h.getLowPairStrength() == eRank.TWO.getRank());
+		assertTrue(h.getKicker().size() == 1);
+		
+	}
+
 	@Test
 	public void Pair() {
 		Deck d = new Deck();
@@ -385,7 +573,57 @@ public class Hand_Test {
 		assertTrue(c4.getRank().getRank() == eRank.TWO.getRank());
 
 	}		
-	
+	@Test
+	public void HighCard_1() {
+		Deck d = new Deck();
+		Hand h = new Hand();
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.TEN,0));
+		h.AddCardToHand(new Card(eSuit.DIAMONDS,eRank.KING,0));
+		h.AddCardToHand(new Card(eSuit.SPADES,eRank.THREE,0));
+		h.AddCardToHand(new Card(eSuit.HEARTS,eRank.TWO,0));
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.ACE,0));
+		h.EvalHand();
+		
+		assertTrue(h.getHandStrength() == eHandStrength.HighCard.getHandStrength());
+		assertTrue(h.getHighPairStrength() == eRank.ACE.getRank());
+		assertTrue(h.getLowPairStrength() == 0);
+		assertTrue(h.getKicker().size() == 4);
+		
+		Card c1 = h.getKicker().get(eCardNo.FirstCard.getCardNo());
+		Card c2 = h.getKicker().get(eCardNo.SecondCard.getCardNo());
+		Card c3 = h.getKicker().get(eCardNo.ThirdCard.getCardNo());
+		Card c4 = h.getKicker().get(eCardNo.FourthCard.getCardNo());
+		
+		//	Check value of kicker
+		assertTrue(c1.getRank().getRank() == eRank.KING.getRank());
+
+		//	Check value of kicker
+		assertTrue(c2.getRank().getRank() == eRank.TEN.getRank());
+
+		//	Check value of kicker
+		assertTrue(c3.getRank().getRank() == eRank.THREE.getRank());
+
+		//	Check value of kicker
+		assertTrue(c4.getRank().getRank() == eRank.TWO.getRank());
+
+	}	
+	@Test
+	public void HighCard_2() {
+		Deck d = new Deck();
+		Hand h = new Hand();
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.TEN,0));
+		h.AddCardToHand(new Card(eSuit.DIAMONDS,eRank.KING,0));
+		h.AddCardToHand(new Card(eSuit.SPADES,eRank.THREE,0));
+		h.AddCardToHand(new Card(eSuit.HEARTS,eRank.TWO,0));
+		h.AddCardToHand(new Card(eSuit.CLUBS,eRank.JOKER,0));
+		h.EvalHand();
+		
+		assertTrue(h.getHandStrength() == eHandStrength.HighCard.getHandStrength());
+		assertTrue(h.getHighPairStrength() == eRank.ACE.getRank());
+		assertTrue(h.getLowPairStrength() == 0);
+		assertTrue(h.getKicker().size() == 4);
+	}
+
 	
 	@Test
 	public void CompareTwoHands() {
